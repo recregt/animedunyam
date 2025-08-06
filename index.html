@@ -1,51 +1,160 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>AnimeDünyam - Yakında Açılıyor!</title>
-  <style>
-    body {
-      background: linear-gradient(135deg, #f8fafc, #e0e7ff);
-      font-family: 'Segoe UI', Arial, sans-serif;
-      text-align: center;
-      padding: 60px;
-    }
-    .container {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-      display: inline-block;
-      padding: 40px 32px;
-      margin-top: 40px;
-    }
-    h1 {
-      color: #6366f1;
-      font-size: 2.5em;
-      margin-bottom: 16px;
-    }
-    p {
-      color: #374151;
-      font-size: 1.2em;
-      margin-bottom: 24px;
-    }
-    .soon {
-      font-size: 1.5em;
-      color: #f59e42;
-      font-weight: bold;
-      animation: pulse 1.5s infinite;
-    }
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeDünyam - Yakında Açılıyor!</title>
+    <style>
+        :root {
+            --background-start: #f8fafc;
+            --background-end: #e0e7ff;
+            --container-bg: #fff;
+            --main-color: #6366f1;
+            --text-color: #374151;
+            --soon-color: #f59e42;
+        }
+
+        body.dark-mode {
+            --background-start: #1a202c;
+            --background-end: #2d3748;
+            --container-bg: #2d3748;
+            --main-color: #818cf8;
+            --text-color: #e2e8f0;
+            --soon-color: #fbd38d;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--background-start), var(--background-end));
+            font-family: 'Segoe UI', Arial, sans-serif;
+            text-align: center;
+            padding: 60px 20px;
+            transition: background 0.5s ease;
+        }
+
+        .container {
+            background: var(--container-bg);
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            display: inline-block;
+            padding: 40px 32px;
+            margin-top: 40px;
+            transition: background 0.5s ease, box-shadow 0.5s ease;
+            max-width: 90%;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            color: var(--main-color);
+            font-size: 2.5em;
+            margin-bottom: 16px;
+            transition: color 0.5s ease;
+        }
+
+        p {
+            color: var(--text-color);
+            font-size: 1.2em;
+            margin-bottom: 24px;
+            transition: color 0.5s ease;
+        }
+
+        .soon {
+            font-size: 1.5em;
+            color: var(--soon-color);
+            font-weight: bold;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--container-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.5s, color 0.5s, transform 0.2s;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 40px 10px;
+            }
+            .container {
+                padding: 30px 20px;
+            }
+            .logo {
+                max-width: 150px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 1em;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>AnimeDünyam</h1>
-    <p>Favori animeleriniz ve topluluk ile buluşmak için yakında buradayız!</p>
-    <div class="soon">Yakında Açılıyor...</div>
-  </div>
+
+    <button id="theme-toggle-btn" class="theme-toggle-btn">Karanlık Moda Geç</button>
+
+    <div class="container">
+        <img id="logo" class="logo" src="img/logo_black.svg" alt="AnimeDünyam Logosu">
+
+        <h1>AnimeDünyam</h1>
+        <p>Favori animeleriniz ve topluluk ile buluşmak için yakında buradayız!</p>
+        <div class="soon">Yakında Açılıyor...</div>
+    </div>
+
+    <script>
+        const themeButton = document.getElementById('theme-toggle-btn');
+        const body = document.body;
+        const logo = document.getElementById('logo');
+        const isDarkMode = localStorage.getItem('dark-mode') === 'true';
+
+        // Sayfa yüklendiğinde localStorage'dan tema bilgisini oku
+        if (isDarkMode) {
+            body.classList.add('dark-mode');
+            logo.src = 'img/logo_white.svg';
+            themeButton.textContent = 'Aydınlık Moda Geç';
+        }
+
+        themeButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isNowDarkMode = body.classList.contains('dark-mode');
+            
+            if (isNowDarkMode) {
+                logo.src = 'img/logo_white.svg';
+                themeButton.textContent = 'Aydınlık Moda Geç';
+            } else {
+                logo.src = 'img/logo_black.svg';
+                themeButton.textContent = 'Karanlık Moda Geç';
+            }
+
+            // Tema bilgisini localStorage'da sakla
+            localStorage.setItem('dark-mode', isNowDarkMode);
+        });
+    </script>
+
 </body>
 </html>
