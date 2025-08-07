@@ -3,158 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnimeDünyam - Yakında Açılıyor!</title>
+    <title>AnimeDünyam - Türkiye'nin Anime Platformu</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        :root {
-            --background-start: #f8fafc;
-            --background-end: #e0e7ff;
-            --container-bg: #fff;
-            --main-color: #6366f1;
-            --text-color: #374151;
-            --soon-color: #f59e42;
-        }
-
-        body.dark-mode {
-            --background-start: #1a202c;
-            --background-end: #2d3748;
-            --container-bg: #2d3748;
-            --main-color: #818cf8;
-            --text-color: #e2e8f0;
-            --soon-color: #fbd38d;
-        }
-
+        /* Custom font-family */
         body {
-            background: linear-gradient(135deg, var(--background-start), var(--background-end));
-            font-family: 'Segoe UI', Arial, sans-serif;
-            text-align: center;
-            padding: 60px 20px;
-            transition: background 0.5s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+        .font-anime {
+            font-family: 'Mochiy Pop One', sans-serif;
         }
 
-        .container {
-            background: var(--container-bg);
-            border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-            display: inline-block;
-            padding: 40px 32px;
-            margin-top: 40px;
-            transition: background 0.5s ease, box-shadow 0.5s ease;
-            max-width: 90%;
+        /* Arka plan animasyonu */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a2a6c);
+            background-size: 400% 400%;
+            animation: gradientBG 20s ease infinite;
         }
 
-        .logo {
-            max-width: 200px;
-            height: auto;
-            margin-bottom: 24px;
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Kartların hover efekti için geçiş */
+        .portal-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
 
-        h1 {
-            color: var(--main-color);
-            font-size: 2.5em;
-            margin-bottom: 16px;
-            transition: color 0.5s ease;
+        .portal-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
         }
-
-        p {
-            color: var(--text-color);
-            font-size: 1.2em;
-            margin-bottom: 24px;
-            transition: color 0.5s ease;
-        }
-
-        .soon {
-            font-size: 1.5em;
-            color: var(--soon-color);
-            font-weight: bold;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
-        .theme-toggle-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            background-color: var(--container-bg);
-            color: var(--text-color);
-            cursor: pointer;
-            font-size: 14px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.5s, color 0.5s, transform 0.2s;
-        }
-
-        .theme-toggle-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 40px 10px;
-            }
-            .container {
-                padding: 30px 20px;
-            }
-            .logo {
-                max-width: 150px;
-            }
-            h1 {
-                font-size: 2em;
-            }
-            p {
-                font-size: 1em;
-            }
+        
+        /* İçeriklerin üstündeki yarı saydam katman */
+        .content-overlay {
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
-<body>
+<body class="text-white overflow-x-hidden transition-colors duration-300 bg-[#e3ecfa] dark:bg-[#181c2a]">
 
-    <button id="theme-toggle-btn" class="theme-toggle-btn">Karanlık Moda Geç</button>
+    <!-- Dark/Light Mode Toggle Button -->
+    <button id="theme-toggle" class="absolute top-6 right-6 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/40 dark:bg-black/40 shadow-lg backdrop-blur-md border border-white/30 dark:border-black/30 transition-colors duration-300" aria-label="Tema Değiştir">
+        <svg id="theme-toggle-light-icon" class="w-7 h-7 text-yellow-400 dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-12.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 4.66l-.71-.71M4.05 4.93l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        <svg id="theme-toggle-dark-icon" class="w-7 h-7 text-gray-800 hidden dark:inline" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/></svg>
+    </button>
 
-    <div class="container">
-        <img id="logo" class="logo" src="img/logo_black.svg" alt="AnimeDünyam Logosu">
+    <!-- Hareketli Arka Plan -->
+    <div class="background-container"></div>
 
-        <h1>AnimeDünyam</h1>
-        <p>Favori animeleriniz ve topluluk ile buluşmak için yakında buradayız!</p>
-        <div class="soon">Yakında Açılıyor...</div>
+    <!-- Ana İçerik -->
+    <div class="content-overlay min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
+        
+        <header class="text-center mb-12">
+            <h1 class="font-anime text-5xl md:text-7xl font-bold tracking-wider text-shadow-lg">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 dark:from-yellow-400 dark:via-pink-400 dark:to-blue-400">
+                    AnimeDünyam
+                </span>
+            </h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-700 dark:text-gray-300">Anime ve Manga Evrenine Açılan Kapınız</p>
+        </header>
+
+        <!-- Portal Navigasyon Kartları -->
+        <main class="w-full max-w-6xl">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                
+                <!-- Blog Kartı -->
+                <a href="https://blog.animedunyam.com" target="_blank" class="portal-card group backdrop-blur-sm bg-white/10 dark:bg-black/30 p-6 rounded-2xl border border-white/20 dark:border-black/30 flex flex-col items-center text-center">
+                    <div class="bg-purple-500/20 dark:bg-purple-900/30 p-4 rounded-full mb-4">
+                        <i data-lucide="book-open-text" class="w-10 h-10 text-purple-300 dark:text-purple-200"></i>
+                    </div>
+                    <h2 class="font-anime text-2xl font-semibold text-black dark:text-white mb-2">Blog</h2>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm">Derinlemesine incelemeler, karakter analizleri ve özel listeler.</p>
+                </a>
+
+                <!-- Forum Kartı -->
+                <a href="https://forum.animedunyam.com" target="_blank" class="portal-card group backdrop-blur-sm bg-white/10 dark:bg-black/30 p-6 rounded-2xl border border-white/20 dark:border-black/30 flex flex-col items-center text-center">
+                    <div class="bg-blue-500/20 dark:bg-blue-900/30 p-4 rounded-full mb-4">
+                        <i data-lucide="messages-square" class="w-10 h-10 text-blue-300 dark:text-blue-200"></i>
+                    </div>
+                    <h2 class="font-anime text-2xl font-semibold text-black dark:text-white mb-2">Forum</h2>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm">Topluluğa katıl, favori serilerini tartış ve yeni arkadaşlar edin.</p>
+                </a>
+
+                <!-- Haberler Kartı -->
+                <a href="https://haberler.animedunyam.com" target="_blank" class="portal-card group backdrop-blur-sm bg-white/10 dark:bg-black/30 p-6 rounded-2xl border border-white/20 dark:border-black/30 flex flex-col items-center text-center">
+                    <div class="bg-green-500/20 dark:bg-green-900/30 p-4 rounded-full mb-4">
+                        <i data-lucide="newspaper" class="w-10 h-10 text-green-300 dark:text-green-200"></i>
+                    </div>
+                    <h2 class="font-anime text-2xl font-semibold text-black dark:text-white mb-2">Haberler</h2>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm">Yeni sezonlar, film duyuruları ve sektörden en güncel gelişmeler.</p>
+                </a>
+
+                <!-- Galeri Kartı -->
+                <a href="https://galeri.animedunyam.com" target="_blank" class="portal-card group backdrop-blur-sm bg-white/10 dark:bg-black/30 p-6 rounded-2xl border border-white/20 dark:border-black/30 flex flex-col items-center text-center sm:col-span-2 lg:col-span-1 lg:row-start-2">
+                    <div class="bg-pink-500/20 dark:bg-pink-900/30 p-4 rounded-full mb-4">
+                        <i data-lucide="image" class="w-10 h-10 text-pink-300 dark:text-pink-200"></i>
+                    </div>
+                    <h2 class="font-anime text-2xl font-semibold text-black dark:text-white mb-2">Galeri</h2>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm">Yüksek çözünürlüklü duvar kağıtları, fan artlar ve özel çizimler.</p>
+                </a>
+
+                <!-- Hakkımızda Kartı -->
+                <a href="https://hakkimizda.animedunyam.com" target="_blank" class="portal-card group backdrop-blur-sm bg-white/10 dark:bg-black/30 p-6 rounded-2xl border border-white/20 dark:border-black/30 flex flex-col items-center text-center sm:col-span-2 lg:col-span-2 lg:row-start-2">
+                    <div class="bg-yellow-500/20 dark:bg-yellow-900/30 p-4 rounded-full mb-4">
+                        <i data-lucide="users" class="w-10 h-10 text-yellow-300 dark:text-yellow-200"></i>
+                    </div>
+                    <h2 class="font-anime text-2xl font-semibold text-black dark:text-white mb-2">Hakkımızda</h2>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm">AnimeDünyam'ı hayata geçiren ekibi ve vizyonumuzu tanıyın.</p>
+                </a>
+
+            </div>
+        </main>
+
+        <footer class="mt-12 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>&copy; 2025 AnimeDünyam. Tüm hakları saklıdır.</p>
+        </footer>
     </div>
 
     <script>
-        const themeButton = document.getElementById('theme-toggle-btn');
-        const body = document.body;
-        const logo = document.getElementById('logo');
-        const isDarkMode = localStorage.getItem('dark-mode') === 'true';
+        // Lucide ikonlarını etkinleştir
+        lucide.createIcons();
 
-        // Sayfa yüklendiğinde localStorage'dan tema bilgisini oku
-        if (isDarkMode) {
-            body.classList.add('dark-mode');
-            logo.src = 'img/logo_white.svg';
-            themeButton.textContent = 'Aydınlık Moda Geç';
+        // Tema geçişi
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+
+        // Tema durumu kontrolü
+        function setTheme(mode) {
+            if (mode === 'dark') {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                lightIcon.classList.add('hidden');
+                darkIcon.classList.remove('hidden');
+            } else {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                darkIcon.classList.add('hidden');
+                lightIcon.classList.remove('hidden');
+            }
         }
 
-        themeButton.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            const isNowDarkMode = body.classList.contains('dark-mode');
-            
-            if (isNowDarkMode) {
-                logo.src = 'img/logo_white.svg';
-                themeButton.textContent = 'Aydınlık Moda Geç';
+        // İlk yüklemede tema kontrolü
+        (function() {
+            const userTheme = localStorage.getItem('theme');
+            if (userTheme === 'dark' || (!userTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                setTheme('dark');
             } else {
-                logo.src = 'img/logo_black.svg';
-                themeButton.textContent = 'Karanlık Moda Geç';
+                setTheme('light');
             }
+        })();
 
-            // Tema bilgisini localStorage'da sakla
-            localStorage.setItem('dark-mode', isNowDarkMode);
+        themeToggle.addEventListener('click', () => {
+            if (html.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
         });
     </script>
-
 </body>
 </html>
