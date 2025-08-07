@@ -61,13 +61,7 @@
         }
     </style>
 </head>
-<body class="text-white overflow-x-hidden transition-colors duration-300 bg-[#e3ecfa] dark:bg-[#181c2a]">
-
-    <!-- Dark/Light Mode Toggle Button -->
-    <button id="theme-toggle" class="absolute top-6 right-6 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/40 dark:bg-black/40 shadow-lg backdrop-blur-md border border-white/30 dark:border-black/30 transition-colors duration-300" aria-label="Tema Değiştir">
-        <svg id="theme-toggle-light-icon" class="w-7 h-7 text-yellow-400 dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-12.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 4.66l-.71-.71M4.05 4.93l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-        <svg id="theme-toggle-dark-icon" class="w-7 h-7 text-gray-800 hidden dark:inline" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/></svg>
-    </button>
+<body class="text-white overflow-x-hidden">
 
     <!-- Hareketli Arka Plan -->
     <div class="background-container"></div>
@@ -77,11 +71,11 @@
         
         <header class="text-center mb-12">
             <h1 class="font-anime text-5xl md:text-7xl font-bold tracking-wider text-shadow-lg">
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 dark:from-yellow-400 dark:via-pink-400 dark:to-blue-400">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
                     AnimeDünyam
                 </span>
             </h1>
-            <p class="mt-4 text-lg md:text-xl text-gray-700 dark:text-gray-300">Anime ve Manga Evrenine Açılan Kapınız</p>
+            <p class="mt-4 text-lg md:text-xl text-gray-300">Anime ve Manga Evrenine Açılan Kapınız</p>
         </header>
 
         <!-- Portal Navigasyon Kartları -->
@@ -89,100 +83,61 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 
                 <!-- Blog Kartı -->
-                <a href="https://blog.animedunyam.com" target="_blank" class="portal-card group backdrop-blur-sm bg-white/10 dark:bg-black/30 p-6 rounded-2xl border border-white/20 dark:border-black/30 flex flex-col items-center text-center">
-                    <div class="bg-purple-500/20 dark:bg-purple-900/30 p-4 rounded-full mb-4">
-                        <i data-lucide="book-open-text" class="w-10 h-10 text-purple-300 dark:text-purple-200"></i>
+                <a href="https://blog.animedunyam.com" target="_blank" class="portal-card group backdrop-blur-sm bg-white/10 p-6 rounded-2xl border border-white/20 flex flex-col items-center text-center">
+                    <div class="bg-purple-500/20 p-4 rounded-full mb-4">
+                        <i data-lucide="book-open-text" class="w-10 h-10 text-purple-300"></i>
                     </div>
-                    <h2 class="font-anime text-2xl font-semibold text-black dark:text-white mb-2">Blog</h2>
-                    <p class="text-gray-700 dark:text-gray-300 text-sm">Derinlemesine incelemeler, karakter analizleri ve özel listeler.</p>
+                    <h2 class="font-anime text-2xl font-semibold text-white mb-2">Blog</h2>
+                    <p class="text-gray-300 text-sm">Derinlemesine incelemeler, karakter analizleri ve özel listeler.</p>
                 </a>
 
                 <!-- Forum Kartı -->
-                <a href="https://forum.animedunyam.com" target="_blank" class="portal-card group backdrop-blur-sm bg-white/10 dark:bg-black/30 p-6 rounded-2xl border border-white/20 dark:border-black/30 flex flex-col items-center text-center">
-                    <div class="bg-blue-500/20 dark:bg-blue-900/30 p-4 rounded-full mb-4">
-                        <i data-lucide="messages-square" class="w-10 h-10 text-blue-300 dark:text-blue-200"></i>
+                <a href="https://forum.animedunyam.com" target="_blank" class="portal-card group backdrop-blur-sm bg-white/10 p-6 rounded-2xl border border-white/20 flex flex-col items-center text-center">
+                    <div class="bg-blue-500/20 p-4 rounded-full mb-4">
+                        <i data-lucide="messages-square" class="w-10 h-10 text-blue-300"></i>
                     </div>
-                    <h2 class="font-anime text-2xl font-semibold text-black dark:text-white mb-2">Forum</h2>
-                    <p class="text-gray-700 dark:text-gray-300 text-sm">Topluluğa katıl, favori serilerini tartış ve yeni arkadaşlar edin.</p>
+                    <h2 class="font-anime text-2xl font-semibold text-white mb-2">Forum</h2>
+                    <p class="text-gray-300 text-sm">Topluluğa katıl, favori serilerini tartış ve yeni arkadaşlar edin.</p>
                 </a>
 
                 <!-- Haberler Kartı -->
-                <a href="https://haberler.animedunyam.com" target="_blank" class="portal-card group backdrop-blur-sm bg-white/10 dark:bg-black/30 p-6 rounded-2xl border border-white/20 dark:border-black/30 flex flex-col items-center text-center">
-                    <div class="bg-green-500/20 dark:bg-green-900/30 p-4 rounded-full mb-4">
-                        <i data-lucide="newspaper" class="w-10 h-10 text-green-300 dark:text-green-200"></i>
+                <a href="https://haberler.animedunyam.com" target="_blank" class="portal-card group backdrop-blur-sm bg-white/10 p-6 rounded-2xl border border-white/20 flex flex-col items-center text-center">
+                    <div class="bg-green-500/20 p-4 rounded-full mb-4">
+                        <i data-lucide="newspaper" class="w-10 h-10 text-green-300"></i>
                     </div>
-                    <h2 class="font-anime text-2xl font-semibold text-black dark:text-white mb-2">Haberler</h2>
-                    <p class="text-gray-700 dark:text-gray-300 text-sm">Yeni sezonlar, film duyuruları ve sektörden en güncel gelişmeler.</p>
+                    <h2 class="font-anime text-2xl font-semibold text-white mb-2">Haberler</h2>
+                    <p class="text-gray-300 text-sm">Yeni sezonlar, film duyuruları ve sektörden en güncel gelişmeler.</p>
                 </a>
 
                 <!-- Galeri Kartı -->
-                <a href="https://galeri.animedunyam.com" target="_blank" class="portal-card group backdrop-blur-sm bg-white/10 dark:bg-black/30 p-6 rounded-2xl border border-white/20 dark:border-black/30 flex flex-col items-center text-center sm:col-span-2 lg:col-span-1 lg:row-start-2">
-                    <div class="bg-pink-500/20 dark:bg-pink-900/30 p-4 rounded-full mb-4">
-                        <i data-lucide="image" class="w-10 h-10 text-pink-300 dark:text-pink-200"></i>
+                <a href="https://galeri.animedunyam.com" target="_blank" class="portal-card group backdrop-blur-sm bg-white/10 p-6 rounded-2xl border border-white/20 flex flex-col items-center text-center sm:col-span-2 lg:col-span-1 lg:row-start-2">
+                    <div class="bg-pink-500/20 p-4 rounded-full mb-4">
+                        <i data-lucide="image" class="w-10 h-10 text-pink-300"></i>
                     </div>
-                    <h2 class="font-anime text-2xl font-semibold text-black dark:text-white mb-2">Galeri</h2>
-                    <p class="text-gray-700 dark:text-gray-300 text-sm">Yüksek çözünürlüklü duvar kağıtları, fan artlar ve özel çizimler.</p>
+                    <h2 class="font-anime text-2xl font-semibold text-white mb-2">Galeri</h2>
+                    <p class="text-gray-300 text-sm">Yüksek çözünürlüklü duvar kağıtları, fan artlar ve özel çizimler.</p>
                 </a>
 
                 <!-- Hakkımızda Kartı -->
-                <a href="https://hakkimizda.animedunyam.com" target="_blank" class="portal-card group backdrop-blur-sm bg-white/10 dark:bg-black/30 p-6 rounded-2xl border border-white/20 dark:border-black/30 flex flex-col items-center text-center sm:col-span-2 lg:col-span-2 lg:row-start-2">
-                    <div class="bg-yellow-500/20 dark:bg-yellow-900/30 p-4 rounded-full mb-4">
-                        <i data-lucide="users" class="w-10 h-10 text-yellow-300 dark:text-yellow-200"></i>
+                <a href="https://hakkimizda.animedunyam.com" target="_blank" class="portal-card group backdrop-blur-sm bg-white/10 p-6 rounded-2xl border border-white/20 flex flex-col items-center text-center sm:col-span-2 lg:col-span-2 lg:row-start-2">
+                    <div class="bg-yellow-500/20 p-4 rounded-full mb-4">
+                        <i data-lucide="users" class="w-10 h-10 text-yellow-300"></i>
                     </div>
-                    <h2 class="font-anime text-2xl font-semibold text-black dark:text-white mb-2">Hakkımızda</h2>
-                    <p class="text-gray-700 dark:text-gray-300 text-sm">AnimeDünyam'ı hayata geçiren ekibi ve vizyonumuzu tanıyın.</p>
+                    <h2 class="font-anime text-2xl font-semibold text-white mb-2">Hakkımızda</h2>
+                    <p class="text-gray-300 text-sm">AnimeDünyam'ı hayata geçiren ekibi ve vizyonumuzu tanıyın.</p>
                 </a>
 
             </div>
         </main>
 
-        <footer class="mt-12 text-center text-gray-500 dark:text-gray-400 text-sm">
-            <p>&copy; 2025 AnimeDünyam. Tüm hakları saklıdır.</p>
+        <footer class="mt-12 text-center text-gray-400 text-sm">
+            <p>&copy; 2024 AnimeDünyam. Tüm hakları saklıdır.</p>
         </footer>
     </div>
 
     <script>
         // Lucide ikonlarını etkinleştir
         lucide.createIcons();
-
-        // Tema geçişi
-        const themeToggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-        const lightIcon = document.getElementById('theme-toggle-light-icon');
-        const darkIcon = document.getElementById('theme-toggle-dark-icon');
-
-        // Tema durumu kontrolü
-        function setTheme(mode) {
-            if (mode === 'dark') {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-                lightIcon.classList.add('hidden');
-                darkIcon.classList.remove('hidden');
-            } else {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-                darkIcon.classList.add('hidden');
-                lightIcon.classList.remove('hidden');
-            }
-        }
-
-        // İlk yüklemede tema kontrolü
-        (function() {
-            const userTheme = localStorage.getItem('theme');
-            if (userTheme === 'dark' || (!userTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                setTheme('dark');
-            } else {
-                setTheme('light');
-            }
-        })();
-
-        themeToggle.addEventListener('click', () => {
-            if (html.classList.contains('dark')) {
-                setTheme('light');
-            } else {
-                setTheme('dark');
-            }
-        });
     </script>
 </body>
 </html>
